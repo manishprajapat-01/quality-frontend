@@ -23,7 +23,7 @@ function VideoTable({ columns, data, handleStatus, handleDelete, isLiveCourse })
             {headerGroups.map(headerGroup => (
               <tr {...headerGroup.getHeaderGroupProps()}>
                  <th>S.N.</th>
-                <th>Images</th>
+                <th>Images</th> 
                 {headerGroup.headers.map(column => (
                   <th key={column.id} {...column.getHeaderProps()}>{column.render('Header')}</th>
                 ))}

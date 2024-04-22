@@ -1,9 +1,9 @@
-import React ,{useState}from 'react'
+import React from 'react'
 import { Link } from 'react-router-dom'
 import { useTable, usePagination, useGlobalFilter } from 'react-table';
 import Filterform from './Filterform';
-
-
+import avtar from '../../assets/images/user/avatar-1.jpg'
+import BASE_URL from "../../config/baseurl";
 function UserDataTable({ columns, data, handleStatus, handleDelete }) {
 
 
@@ -20,6 +20,7 @@ function UserDataTable({ columns, data, handleStatus, handleDelete }) {
             {headerGroups.map(headerGroup => (
               <tr {...headerGroup.getHeaderGroupProps()}>
                 <th>S no.</th>
+                <th>Images</th>
                 {headerGroup.headers.map(column => (
                   <th {...column.getHeaderProps()}>{column.render('Header')}</th>
                 ))}
@@ -33,7 +34,9 @@ function UserDataTable({ columns, data, handleStatus, handleDelete }) {
               prepareRow(row);
               return (
                 <tr {...row.getRowProps()} >
-                  <td >{row.index + 1}</td> 
+                  <td >{row.index + 1}</td>
+                  <td> <img src={(row.cells[0].row.original?.profileImg) ? `${BASE_URL}/${row.cells[0].row.original?.profileImg}` : avtar} className='img-50' alt='' /></td>
+
                   {row.cells.map(cell => (
                     <td key={cell.id} {...cell.getCellProps()}>{(cell.column.Header === "DOB") ? (cell.value.split("T")[0]) : cell.render('Cell')}</td>
                   ))}
