@@ -3,6 +3,7 @@ import Header from "./Header"
 import { Link, useNavigate } from "react-router-dom";
 import BASE_URL from "../config/baseurl";
 import {ToastMes} from "./utils/com"
+import axios from "axios"
 export default function Home() {
    const navigate = useNavigate();
    let token = localStorage.getItem("token");
@@ -16,7 +17,7 @@ export default function Home() {
    }, []);
 
    useEffect(() => {
-      let apiCall = async () => {
+      ;(async () => {
          let res = await fetch(`${BASE_URL}/api/user/all_data`, {
             method: "GET",
             headers: {
@@ -29,10 +30,25 @@ export default function Home() {
             localStorage.clear();
             navigate("/login");
          }
+         console.log("ifi is working")
          
          ToastMes({status:true})
-      };
-      apiCall();
+      })();
+      // ;(async ()=>{
+      //   try {
+      //    let response= await axios(`${BASE_URL}/api/user/all_data `,{
+      //       method:'GET',
+      //       headers:{
+      //        Authorization:localStorage.getItem("token")
+      //       }
+      //    })
+      //     console.log(response.data)
+      //   } catch (error) {
+      //    console.log(error?.response?.data?.message);
+      //    console.log(error);
+      //    // alert("Something went wrong");
+      //   }
+      // })() 
    }, []);
 
    useEffect(() => {
